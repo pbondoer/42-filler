@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/01 21:02:30 by pbondoer          #+#    #+#              #
-#    Updated: 2017/09/28 14:17:15 by pbondoer         ###   ########.fr        #
+#    Updated: 2017/09/28 15:33:47 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,16 +33,15 @@ L_FT	:= $(LIB_DIR)/libft
 include $(L_FT)/libft.mk
 
 # rules
-all: $(LIB) $(NAME)
-
-$(LIB):
-	@$(MAKE) -C $(L_FT)
+all:
+	@$(MAKE) -C $(L_FT) all
+	@$(MAKE) $(NAME)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) $(LIB_INC) -o $@ -c $<
+	$(CC) $(CFLAGS) -I $(INC_DIR) $(LIB_INC) -o $@ -c $<
 
 $(NAME): $(OBJ_DIR) $(OBJ)
 	$(CC) $(OBJ) $(LIB_LNK) -o $(NAME)
