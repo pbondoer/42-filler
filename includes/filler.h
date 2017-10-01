@@ -6,7 +6,7 @@
 /*   By: pbondoer <pierre@bondoer.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 14:20:45 by pbondoer          #+#    #+#             */
-/*   Updated: 2017/09/28 16:01:07 by pbondoer         ###   ########.fr       */
+/*   Updated: 2017/10/01 06:50:27 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct	s_token
 {
 	int			width;
 	int			height;
-	char		player;
 	char		**data;
 }				t_token;
 
@@ -44,5 +43,8 @@ typedef struct	s_filler
 /*
 ** Framework to build a player
 */
+
+void			filler_loop(t_filler filler);
+t_token			read_token(char *line, int offset);
 
 #endif

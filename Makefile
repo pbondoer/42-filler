@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/01 21:02:30 by pbondoer          #+#    #+#              #
-#    Updated: 2017/09/28 15:33:47 by pbondoer         ###   ########.fr        #
+#    Updated: 2017/10/01 06:04:00 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ INC_DIR	:= ./includes
 OBJ_DIR	:= ./obj
 
 # src / obj files
-SRC		:= filler.c
+SRC		:=	filler.c \
+			board.c
 
 OBJ		:= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
