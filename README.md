@@ -1,10 +1,8 @@
 # Filler @ 42
- Will you be the best?
+a.k.a. `free_hugs`
 
 The goal of this project is to code an AI for the game of Filler, for which we
 have a virtual machine.
-
-The attached Makefile will compile my player `free_hugs`.
 
 ## Compiling and running
 First of all run `git submodule init`. Then run `make` to obtain the player.
