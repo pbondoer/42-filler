@@ -6,7 +6,7 @@
 /*   By: pbondoer <pierre@bondoer.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 14:20:45 by pbondoer          #+#    #+#             */
-/*   Updated: 2017/10/01 06:50:27 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:04:07 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,26 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-# define TTY "/dev/pts/3"
+# define TTY "/dev/ttys000"
+
+/*
+** Point
+*/
+typedef struct	s_point
+{
+	int			x;
+	int			y;
+}				t_point;
+
+/*
+** Player object
+*/
+typedef struct	s_player
+{
+	char		id;
+	char		id_alt;
+	t_point		start;
+}				t_player;
 
 /*
 ** Standard structure for both the board and pieces
@@ -26,6 +45,7 @@ typedef struct	s_token
 {
 	int			width;
 	int			height;
+	int			size;
 	char		**data;
 }				t_token;
 
@@ -35,7 +55,10 @@ typedef struct	s_token
 
 typedef struct	s_filler
 {
-	char		player;
+	int			inited;
+	t_player	player;
+	t_player	enemy;
+	t_point		strategy;
 	t_token		board;
 	t_token		token;
 }				t_filler;

@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/01 21:02:30 by pbondoer          #+#    #+#              #
-#    Updated: 2017/10/01 06:04:00 by pbondoer         ###   ########.fr        #
+#    Updated: 2018/02/15 18:17:12 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ INC_DIR	:= ./includes
 OBJ_DIR	:= ./obj
 
 # src / obj files
-SRC		:=	filler.c \
-			board.c
+SRC		:=	filler.c
 
 OBJ		:= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
@@ -61,6 +60,9 @@ relibs:
 	@$(MAKE) -C $(L_FT) re
 	@$(MAKE) fclean --no-print-directory
 	@$(MAKE) all --no-print-directory
+
+test: all
+	./res/filler_vm -f ./res/maps/map02 -p1 ./res/players/carli.filler -p2 ./filler
 
 # special rules
 .PHONY: all clean fclean re relibs
