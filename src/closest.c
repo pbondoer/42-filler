@@ -6,24 +6,34 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 19:28:23 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/02/15 19:31:22 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/03/01 09:51:53 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include <stdlib.h>
 
+void		create_arrays(t_filler *filler)
+{
+	int		size;
+
+	if (filler->buf_p)
+		ft_memdel((void **)&filler->buf_p);
+	if (filler->buf_e)
+		ft_memdel((void **)&filler->buf_e);
+	size = filler->board.size;
+	if (!(filler->buf_p = ft_memalloc(size * sizeof(t_point))) ||
+		!(filler->buf_e = ft_memalloc(size * sizeof(t_point))))
+		exit(1);
+	ft_bzero(filler->buf_p, size * sizeof(t_point));
+	ft_bzero(filler->buf_e, size * sizeof(t_point));
+}
+
 void		populate_closest_array(t_filler *filler)
 {
 	t_point	point;
 
-	filler->p_count = filler->board.size;
-	filler->e_count = filler->board.size;
-	if (!(filler->buf_p = ft_memalloc(filler->p_count * sizeof(t_point))) ||
-		!(filler->buf_e = ft_memalloc(filler->e_count * sizeof(t_point))))
-		exit(1);
-	ft_bzero(filler->buf_p, filler->p_count * sizeof(t_point));
-	ft_bzero(filler->buf_e, filler->e_count * sizeof(t_point));
+	create_arrays(filler);
 	filler->p_count = 0;
 	filler->e_count = 0;
 	point.y = 0;

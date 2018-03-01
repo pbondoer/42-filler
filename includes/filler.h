@@ -6,7 +6,7 @@
 /*   By: pbondoer <pierre@bondoer.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 14:20:45 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/02/15 19:38:47 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/03/01 09:56:06 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ typedef struct	s_filler
 	int			e_count;
 }				t_filler;
 
-t_point		closest_pair(t_filler filler);
-int			try_place(t_filler filler, t_point point);
-void		place(t_filler filler);
-int			place_around(t_filler filler, t_point p, t_point *result);
-t_point		find_placement(t_filler filler);
+t_point			closest_pair(t_filler filler);
+int				try_place(t_filler filler, t_point point);
+void			place(t_filler filler);
+int				place_around(t_filler filler, t_point p, t_point *result);
+t_point			find_placement(t_filler filler);
 
 #endif

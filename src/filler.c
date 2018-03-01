@@ -6,36 +6,52 @@
 /*   By: pbondoer <pierre@bondoer.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 14:17:39 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/02/15 19:32:56 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/03/01 09:55:52 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include <fcntl.h>
 
-t_token		read_token(char *line, int offset)
+void		free_token(t_token *token, int offset)
 {
-	t_token	token;
+	int		i;
+	char	*str;
+
+	if (!token->data)
+		return ;
+	i = 0;
+	while (i < token->height)
+	{
+		str = token->data[i] - offset;
+		ft_strdel(&str);
+		i++;
+	}
+	ft_memdel((void **)&token->data);
+}
+
+void		read_token(char *line, int offset, t_token *token)
+{
 	int		i;
 
+	free_token(token, offset);
 	line = ft_strchr(line, ' ') + 1;
-	token.height = ft_atoi(line);
-	token.width = ft_atoi(ft_strchr(line, ' '));
-	token.size = token.height * token.width;
+	token->height = ft_atoi(line);
+	token->width = ft_atoi(ft_strchr(line, ' '));
+	token->size = token->height * token->width;
 	if (offset)
 	{
 		get_next_line(0, &line);
 		ft_strdel(&line);
 	}
-	token.data = ft_memalloc(token.height * sizeof(char *));
+	token->data = ft_memalloc(token->height * sizeof(char *));
 	i = 0;
-	while (i < token.height)
+	while (i < token->height)
 	{
 		get_next_line(0, &line);
-		token.data[i] = line + offset;
+		token->data[i] = line + offset;
 		i++;
 	}
-	return (token);
 }
 
 void		init(t_filler *filler)
@@ -74,13 +90,13 @@ void		filler_loop(t_filler filler)
 			continue;
 		if (!ft_strncmp(line, "Plateau ", 8))
 		{
-			filler.board = read_token(line, 4);
+			read_token(line, 4, &filler.board);
 			if (!filler.inited)
 				init(&filler);
 		}
 		else if (!ft_strncmp(line, "Piece ", 6))
 		{
-			filler.token = read_token(line, 0);
+			read_token(line, 0, &filler.token);
 			place(filler);
 		}
 		ft_strdel(&line);
@@ -92,10 +108,12 @@ int			main(void)
 	t_filler	filler;
 	char		*line;
 
+	ft_bzero(&filler, sizeof(t_filler));
 	line = NULL;
 	filler.inited = 0;
-	if (get_next_line(0, &line) && line && !ft_strncmp(line, "$$$ exec p", 9)
-			&& (line[10] == '1' || line[10] == '2'))
+	if (get_next_line(0, &line) && line && ft_strlen(line) > 10 &&
+			!ft_strncmp(line, "$$$ exec p", 9) &&
+			(line[10] == '1' || line[10] == '2'))
 	{
 		filler.player.id = (line[10] == '1' ? 'O' : 'X');
 		filler.enemy.id = (line[10] == '1' ? 'X' : 'O');
