@@ -6,11 +6,11 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/01 21:02:30 by pbondoer          #+#    #+#              #
-#    Updated: 2018/02/15 19:29:08 by pbondoer         ###   ########.fr        #
+#    Updated: 2018/03/13 17:06:49 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	:= filler
+NAME	:= pbondoer.filler
 
 # directories
 SRC_DIR	:= ./src
